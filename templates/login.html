@@ -1,11 +1,49 @@
-<html>
-    <head></head>
-    <body>
-        <h1>Log In</h1>
-        <form method="POST" action="/login">
-            <input type="text" name="username" placeholder="Your Username">
-            <input type="submit" value="Submit">
-        </form>
-        <a href={{ url_for('signup') }}>Sign Up</a>
-    </body>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Membership Login</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}">
+</head>
+
+<body>
+        <div class="container">
+            <div class="row">
+                <div class="padded">
+                    <div class="text-center">
+                        <p>Membership Login</p>
+                    </div>
+                </div>
+                <div class="padded">
+                    <form action="/login" method="POST">
+                        <input type="username" name="username" placeholder="Username">
+                        <input type="password" name="password" placeholder="Password">
+                        <input class="btn btn-primary" type="submit" value="Login">
+                    </form>
+                    {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul class="flashes">
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+                    <!-- <p><span class="psw">Forgot password?</span></p> -->
+                    <hr>
+                    <a type="button" href="/index" class="btn btn-dark">Go back to Homepage</a>
+                
+
+                </div>
+            </div>
+
+        </div>
+
+</body>
+
 </html>

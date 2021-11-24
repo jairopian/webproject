@@ -1,11 +1,42 @@
-<html>
-    <head></head>
-    <body>
-        <h1>Sign up!</h1>
-        <form method="POST" action="/signup">
-            <input class="input is-large" type="text" name="username" placeholder="Your Username" autofocus="">
-            <input type="submit" value="Submit">
-        </form>
-        <a href={{ url_for('login') }}>Log In</a>
-    </body>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>NFTScache</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}">
+</head>
+
+<body>
+        <div class="container">
+            <div class="row">
+                <div class="padded">
+                   
+                    <div class="text-center">
+                        <p>Your introduction into the world of NFTs.</p>
+                    </div>
+                </div>
+                <div class="padded">
+                    <form  method="POST" action="/signup">
+                        <input type = "username" name ="username" placeholder="Username">
+                        <input type="password" name="password" placeholder="Password">
+                        <input class="btn btn-primary" type="submit" value="Sign Up">
+                    </form>
+                    <!-- <p><span class="psw">Forgot password?</span></p> -->
+                    <hr>
+                    <a type="button" href="/login" class="btn btn-dark">Already have an Account</a>
+
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+
+</body>
+
 </html>

@@ -1,14 +1,18 @@
-import flask
-from flask_login.utils import login_required
-import requests
 import os
-
-from dotenv import load_dotenv, find_dotenv
-load_dotenv(find_dotenv())
-
-
-from flask_login import login_user, current_user, LoginManager
+import flask
+from flask import render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import (
+    login_required,
+    current_user,
+    login_user,
+    logout_user,
+    LoginManager,
+    UserMixin,
+)
+from dotenv import load_dotenv, find_dotenv
+from werkzeug.security import generate_password_hash, check_password_hash
+load_dotenv(find_dotenv())
 
 app = flask.Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
@@ -19,18 +23,26 @@ from flask_login import UserMixin
 
 db = SQLAlchemy(app)
 
-class User(UserMixin, db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	username = db.Column(db.String(80))
+class UserModel(UserMixin, db.Model):
+    """Makes database to save user login"""
+    __tablename__ = "users"
 
-	def __repr__(self):
-		return f"<User {self.username}>"
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(80), unique=True)
+    username = db.Column(db.String(100))
+    password_hash = db.Column(db.String())
 
-	def get_username(self):
-		return self.username
+    def set_password(self, password):
+        """ generates hash for password"""
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        """checks password hash"""
+        return check_password_hash(self.password_hash, password)
 
 
 db.create_all()
+
 
 login_manager = LoginManager()
 login_manager.login_view = 'login'
@@ -39,57 +51,82 @@ login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(user_name):
-	return User.query.get(user_name)
-
-@app.route('/signup')
-def signup():
-	return flask.render_template("signup.html")
-
-@app.route('/signup', methods=["POST"])
-def signup_post():
-	username = flask.request.form.get('username')
-	user = User.query.filter_by(username=username).first()
-	if user:
-		pass
-	else:
-		user = User(username=username)
-		db.session.add(user)
-		db.session.commit()
-	
-	return flask.redirect(flask.url_for('login'))
-
-@app.route('/login')
-def login():
-	return flask.render_template("login.html")
-
-@app.route('/login', methods=["POST"])
-def login_post():
-	username = flask.request.form.get('username')
-	user = User.query.filter_by(username=username).first()
-	if user:
-		login_user(user)
-		return flask.redirect(flask.url_for('index'))
-
-	else:
-		return flask.jsonify(
-			{"status": 401,"reason": "Username or Password Error"}
-		)
-
-
-
+	return UserModel.query.get(user_name)
 
 @app.route('/')
 def main():
-	if current_user.is_authenticated:
-		return flask.redirect(flask.url_for('index'))
-	return flask.redirect(flask.url_for('login'))
+	return flask.redirect(flask.url_for('index'))
 
 @app.route('/index')
-@login_required
 def index():
 	return flask.render_template(
     	"index.html",
     )
+
+@app.route("/login", methods=["POST", "GET"])
+def login():
+    """Routes user to login"""
+    if current_user.is_authenticated:
+        return redirect("/")
+    if request.method == "POST":
+        username = request.form["username"]
+        user = UserModel.query.filter_by(username=username).first()
+        if user is not None and user.check_password(request.form["password"]):
+            login_user(user)
+            return redirect("/")
+        if user is None:
+            flask.flash("Invalid username or password, please try again.")
+            return redirect("/login")
+
+    return render_template("login.html")
+
+
+@app.route("/signup", methods=["POST", "GET"])
+def signup():
+    """Routes user to sign up page"""
+    if current_user.is_authenticated:
+        return redirect("/")
+
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
+        if UserModel.query.filter_by( username=username).first():
+            return "Email already Present"
+
+        user = UserModel(username=username)
+        user.set_password(password)
+        db.session.add(user)
+        db.session.commit()
+        return redirect("/")
+    return render_template("signup.html")
+
+@app.route("/logout")
+def logout():
+    """logouts user"""
+    logout_user()
+    return redirect("/index")
+
+@app.route("/aboutus")
+def aboutus():
+    return flask.render_template("aboutus.html")
+
+@app.route("/resources")
+def resources():
+    return flask.render_template("resources.html")
+
+@app.route("/membership")
+@login_required
+def membership():
+    return flask.render_template("membership.html")
+
+@app.route('/memberships')
+def memberships():
+	if current_user.is_authenticated:
+		return flask.redirect(flask.url_for('membership'))
+	return flask.redirect(flask.url_for('login'))
+
+
 
 app.run(host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", 8080)), debug=True)
 
