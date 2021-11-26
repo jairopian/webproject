@@ -73,7 +73,7 @@ def login():
         user = UserModel.query.filter_by(username=username).first()
         if user is not None and user.check_password(request.form["password"]):
             login_user(user)
-            return redirect("/")
+            return redirect("/membership")
         if user is None:
             flask.flash("Invalid username or password, please try again.")
             return redirect("/login")
@@ -111,14 +111,21 @@ def logout():
 def aboutus():
     return flask.render_template("aboutus.html")
 
-@app.route("/resources")
-def resources():
-    return flask.render_template("resources.html")
+@app.route("/checklist")
+def checklist():
+    return flask.render_template("checklist.html")
+
+@app.route("/site")
+def site():
+    return flask.render_template("site.html")
+
 
 @app.route("/membership")
 @login_required
 def membership():
-    return flask.render_template("membership.html")
+    return render_template(
+    "membership.html",
+    username=current_user.username)
 
 @app.route('/memberships')
 def memberships():

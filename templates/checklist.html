@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <title>Checklist</title>
+    <link rel="stylesheet" href="/static/homepage.css">
+
+</head>
+
+<body>
+
+    <div id=navigation class="cell small-12 medium-12 large-12">
+        <nav class="centerbutton">
+            <div class="left">
+
+            </div>
+            <div class="right">
+                <a href={{ url_for('index') }} class="btnStack ">Home</a>
+                <a href={{ url_for('checklist') }} class="btnStack ">Checklist</a>
+                <a href={{ url_for('aboutus') }} class="btnStack ">About US</a>
+                <a href={{ url_for('site') }} class="btnStack ">Site</a>
+                <a href={{ url_for('memberships') }} class="btnStack ">Membership Page</a>
+                <a href={{ url_for('login') }} class="btnStack ">Login</a>
+            </div>
+        </nav>
+    </div>
+    <div id="middleblock">
+        <h1>Checklist</h1>
+        <ul>
+            <li>Site Description - <a href={{ url_for('site') }} class="btnStack ">Site</a> </li>
+            <li>About us - <a href={{ url_for('aboutus') }} class="btnStack ">About US</a> </li>
+            <li>Homepage first page you see - <a href={{ url_for('index') }} class="btnStack ">Home</a> </li>
+            <li>Memebership area - <a href={{ url_for('memberships') }} class="btnStack ">Membership Page</a> - this
+                page will only show up once a user is logged in. If the user is not logged in it will redirect to a
+                login page.</li>
+            <li>Theme - Using my own theme I created</li>
+            <li>General User – user: demouser password: ThisIsForWPClass</li>
+            <li>Javascript Usage- <a href={{ url_for('memberships') }} class="btnStack ">Membership Page</a>   used it on membership page to redirect to other page </li>
+            <li>Database Usage -<a href={{ url_for('memberships') }} class="btnStack ">Membership Page</a>  Used data base to store user name and password and also encrypt the password in it with
+                hash. Also pulled the current logged in use to pop up on membership page </li>
+            <li>Ajax usage - <a href={{ url_for('index') }} class="btnStack ">Home</a>  used the buttons to fuction to other pages </li>
+            <li>New Library Usage - the whole app is built on top of the flask library with the login fuction as well and the hashing</li>
+        </ul>
+    </div>
+
+</body>
+
+</html>

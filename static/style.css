@@ -92,3 +92,24 @@ input{
   margin: 10px 0px;
   padding: 10px;
 }
+
+
+body {
+  font-family: 'Courier New', monospace;
+  text-align: center;
+  background: linear-gradient(-45deg,  #f3e5f5, #e73c7e, #23a6d5, #00FFFF);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
+}

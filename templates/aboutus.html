@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Homepage</title>
+    <title>About us</title>
     <link rel="stylesheet" href="/static/homepage.css">
 
 </head>
@@ -11,34 +11,48 @@
     <div id=navigation class="cell small-12 medium-12 large-12">
         <nav class="centerbutton">
             <div class="left">
-                
+
             </div>
             <div class="right">
                 <a href={{ url_for('index') }} class="btnStack ">Home</a>
-				<a href={{ url_for('resources') }} class="btnStack ">resources</a>
-				<a href={{ url_for('aboutus') }} class="btnStack ">About US</a>
-				<a href={{ url_for('memberships') }} class="btnStack ">Membership Page</a>
-				<a href={{ url_for('login') }} class="btnStack ">Login</a>
-				<a href={{ url_for('logout') }} class="btnStack  ">Logout</a>
-                
+                <a href={{ url_for('checklist') }} class="btnStack ">Checklist</a>
+                <a href={{ url_for('aboutus') }} class="btnStack ">About US</a>
+                <a href={{ url_for('site') }} class="btnStack ">Site</a>
+                <a href={{ url_for('memberships') }} class="btnStack ">Membership Page</a>
+                <a href={{ url_for('login') }} class="btnStack ">Login</a>
+
             </div>
         </nav>
 
     </div>
     <h1 class=>About Us</h1>
-    <div id="middleblock" >
+    <div id="middleblock">
 
-    <h2>Section 1 – About who you are.</h2>
+        <h2>Section 1 – About who you are.</h2>
+        <p>Hello I am A Senior at Georgia State Univeristy taking the Web Programming class. I am A Computer Science
+            major. I will graduate this Spring.
+        </p>
 
-    <h2>Section 2 – Project Description and why you choose this project</h2>
+        <p>I like watching movies and coding in my free time.</p>
 
-    <h2>Section 3 – Description of technology used for your site</h2>
+        <h2>Section 2 – Project Description and why you choose this project</h2>
+        <p>I choose this project to help my dad put his business online. So that way he will be able to get more clients and have more work.
+        also did this so I can test myself if I can create a page from scratch. </p>
+        <h2>Section 3 – Description of technology used for your site</h2>
+        <p>I am using flask and heroku to host my webpage.Also I made this all from scratch</p>
 
-    <h2>Section 4 – What have you learned in this class</h2>
-    
-       
+        <h2>Section 4 – What have you learned in this class</h2>
+        <ul>
+            <li>I learned how to use css really good</li>
+            <li>Thought me how to look up thing when I got stuck</li>
+            <li>Learned how to use word press and get fimilared with it</li>
+            <li>Learned that php html and css can work as one also with javascript</li>
+            <li>Learned a bit more of time management</li>
+        </ul>
+
+
     </div>
-    
+
 </body>
 
 </html>
