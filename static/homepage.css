@@ -114,15 +114,47 @@ body {
 
 #sidebar {
     padding: 10px;
-    background: lightblue;
+    background: linear-gradient(-45deg,  #f3e5f5, #e73c7e, #23a6d5, #00FFFF);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;	
 }
 #body {
-    padding: 10px;			
+    padding: 10px;
+    background: linear-gradient(-45deg,  #f3e5f5, #e73c7e, #23a6d5, #00FFFF);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;	
+    		
 }
 .nav {
     margin: 10px;
+    background: linear-gradient(-45deg,  #f3e5f5, #e73c7e, #23a6d5, #00FFFF);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
 }
 
 #entire {
     margin: 25px;
+    background: linear-gradient(-45deg,  #f3e5f5, #e73c7e, #23a6d5, #00FFFF);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+#header {
+    background: linear-gradient(-45deg,  #f3e5f5, #e73c7e, #23a6d5, #00FFFF);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+
+    
+
+}
+
+#footer{
+    padding: 10px;
+    background: linear-gradient(-45deg,  #f3e5f5, #e73c7e, #23a6d5, #00FFFF);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+img{
+    max-width: 200px;
+    max-height: 200px;
 }

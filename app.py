@@ -43,7 +43,7 @@ class UserModel(UserMixin, db.Model):
 
 db.create_all()
 
-
+images=["static/mac.jpg"]
 login_manager = LoginManager()
 login_manager.login_view = 'login'
 login_manager.init_app(app)
@@ -118,6 +118,25 @@ def checklist():
 @app.route("/site")
 def site():
     return flask.render_template("site.html")
+
+
+@app.route('/index2')
+def index2():
+	return flask.render_template(
+    	"index2.html",
+    )
+@app.route("/aboutus2")
+def aboutus2():
+    return flask.render_template("aboutus2.html")
+
+@app.route("/checklist2")
+def checklist2():
+    return flask.render_template("checklist2.html")
+
+@app.route("/site2")
+def site2():
+    return flask.render_template("site2.html")
+
 
 
 @app.route("/membership")
